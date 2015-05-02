@@ -4,13 +4,13 @@ The Open Graph protocol enables any web page to become a rich object in a social
 Moreover, they use specal facebook widgets like: ‘Like’, ‘Share’, ‘Comments’ and ‘Recommend’ on their websites. The Open Graph Meta tags (or Facebook Open Graph API) that I am going to describe today will help you control over information to be shared on facebook (like url, title, image and description).
 
 ## <a name='TOC'>Table of Contents</a>
-1. [Basic Metadata](#BasicMetadata)
+
+  1. [Basic Metadata](#BasicMetadata)
     - [Overview](#overView)
-    - 
 
 ## <a name='BasicMetadata'>Basic Metadata</a>
 
-### <a name='Overview'>Overview</a>
+### <a name='overView'>Overview</a>
 To turn your web pages into graph objects, you need to add basic metadata to your page. We've based the initial version of the protocol on RDFa which means that you'll place additional <meta> tags in the <head> of your web page. The four required properties for every page are:
 
 ```
