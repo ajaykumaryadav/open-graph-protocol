@@ -7,6 +7,7 @@ Moreover, they use specal facebook widgets like: ‘Like’, ‘Share’, ‘Com
 
   1. [Basic Metadata](#BasicMetadata)
     - [Overview](#overView)
+    - [Optional Metadata](#optionalMetadata)
 
 ## <a name='BasicMetadata'>Basic Metadata</a>
 
@@ -32,4 +33,30 @@ As an example, the following is the Open Graph protocol markup for The Rock on I
 </head>
 ...
 </html>
+```
+
+### <a name='optionalMetadata'>Optional Metadata</a>
+The following properties are optional for any object and are generally recommended:
+```
+og:audio - A URL to an audio file to accompany this object.
+og:description - A one to two sentence description of your object.
+og:determiner - The word that appears before this object's title in a sentence. An enum of (a, an, the, "", auto). If auto is chosen, the consumer of your data should chose between "a" or "an". Default is "" (blank).
+og:locale - The locale these tags are marked up in. Of the format language_TERRITORY. Default is en_US.
+og:locale:alternate - An array of other locales this page is available in.
+og:site_name - If your object is part of a larger web site, the name which should be displayed for the overall site. e.g., "IMDb".
+og:video - A URL to a video file that complements this object.
+For example (line-break solely for display purposes):
+```
+
+```html
+<meta property="og:audio" content="http://example.com/bond/theme.mp3" />
+<meta property="og:description"
+  content="Sean Connery found fame and fortune as the
+           suave, sophisticated British agent, James Bond." />
+<meta property="og:determiner" content="the" />
+<meta property="og:locale" content="en_GB" />
+<meta property="og:locale:alternate" content="fr_FR" />
+<meta property="og:locale:alternate" content="es_ES" />
+<meta property="og:site_name" content="IMDb" />
+<meta property="og:video" content="http://example.com/bond/trailer.swf" />
 ```
