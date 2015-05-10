@@ -8,6 +8,7 @@ Moreover, they use specal facebook widgets like: ‘Like’, ‘Share’, ‘Com
   1. [Basic Metadata](#BasicMetadata)
     - [Overview](#overView)
     - [Optional Metadata](#optionalMetadata)
+    - [Structured Properties](#structuredProperties)
 
 ## <a name='BasicMetadata'>Basic Metadata</a>
 
@@ -60,3 +61,75 @@ For example (line-break solely for display purposes):
 <meta property="og:site_name" content="IMDb" />
 <meta property="og:video" content="http://example.com/bond/trailer.swf" />
 ```
+
+### <a name='structuredProperties'>Structured Properties</a>
+Some properties can have extra metadata attached to them. These are specified in the same way as other metadata with property and content, but the property will have extra :.
+
+The og:image property has some optional structured properties:
+```
+> og:image:url - Identical to og:image.
+> og:image:secure_url - An alternate url to use if the webpage requires HTTPS.
+> og:image:type - A MIME type for this image.
+> og:image:width - The number of pixels wide.
+> og:image:height - The number of pixels high.
+```
+
+A full image example:
+
+```html
+<meta property="og:image" content="http://example.com/ogp.jpg" />
+<meta property="og:image:secure_url" content="https://secure.example.com/ogp.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="400" />
+<meta property="og:image:height" content="300" />
+```
+
+The og:video tag has the identical tags as og:image. Here is an example:
+```html
+<meta property="og:video" content="http://example.com/movie.swf" />
+<meta property="og:video:secure_url" content="https://secure.example.com/movie.swf" />
+<meta property="og:video:type" content="application/x-shockwave-flash" />
+<meta property="og:video:width" content="400" />
+<meta property="og:video:height" content="300" />
+```
+The og:audio tag only has the first 3 properties available (since size doesn't make sense for sound):
+```html
+<meta property="og:audio" content="http://example.com/sound.mp3" />
+<meta property="og:audio:secure_url" content="https://secure.example.com/sound.mp3" />
+<meta property="og:audio:type" content="audio/mpeg" />
+```
+
+Arrays
+If a tag can have multiple values, just put multiple versions of the same <meta> tag on your page. The first tag (from top to bottom) is given preference during conflicts.
+```html
+<meta property="og:image" content="http://example.com/rock.jpg" />
+<meta property="og:image" content="http://example.com/rock2.jpg" />
+```
+Put structured properties after you declare their root tag. Whenever another root element is parsed, that structured property is considered to be done and another one is started.
+
+For example:
+```html
+<meta property="og:image" content="http://example.com/rock.jpg" />
+<meta property="og:image:width" content="300" />
+<meta property="og:image:height" content="300" />
+<meta property="og:image" content="http://example.com/rock2.jpg" />
+<meta property="og:image" content="http://example.com/rock3.jpg" />
+<meta property="og:image:height" content="1000" />
+```
+means there are 3 images on this page, the first image is 300x300, the middle one has unspecified dimensions, and the last one is 1000px tall.
+
+Object Types
+In order for your object to be represented within the graph, you need to specify its type. This is done using the og:type property:
+```html
+<meta property="og:type" content="website" />
+```
+When the community agrees on the schema for a type, it is added to the list of global types. All other objects in the type system are CURIEs of the form
+```html
+<head prefix="my_namespace: http://example.com/ns#">
+<meta property="og:type" content="my_namespace:my_type" />
+```
+The global types are grouped into verticals. Each vertical has its own namespace. The og:type values for a namespace are always prefixed with the namespace and then a period. This is to reduce confusion with user-defined namespaced types which always have colons in them.
+
+Music
+Namespace URI: http://ogp.me/ns/music#
+og:type values:
